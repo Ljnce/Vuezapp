@@ -1,12 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <router-view/>
   </div>
 </template>
+
+<script>
+
+export default {
+  name:"app",
+  // data() {
+  //   return {
+  //     messages: null
+  //   }
+  // },
+  // mounted () {
+  //   this.axios.get('http://127.0.0.1:8000/api/players', {
+  //     headers: {
+  //       'Authorization' : 'Bearer'+ 'Pippo89',
+  //       'Content-Type' : 'application/json',
+  //     }
+  //   })
+  //   .then(response => {
+  //     this.messages = response.data
+  //     console.log(response.data);
+  //   })
+  // }
+}
+
+</script>
 
 <style lang="scss">
 #app {
