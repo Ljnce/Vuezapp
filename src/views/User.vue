@@ -4,6 +4,7 @@
     <div class="container-grey"></div>
     <div class="enter">
         <router-link :to="{ name: 'Vuezapp', params: {} }"><img alt="Vue logo" src="../assets/logo.png" /></router-link>
+        <h1 style="color: #41b883 ">Zapp</h1>
     </div>
   </div>
 </template>

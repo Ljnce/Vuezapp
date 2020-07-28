@@ -8,7 +8,12 @@
           <img @click="slideDown()" class="avatar" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e13eb438650505.598fa118c8eab.jpg" alt="">
         </div>
         <div class="center-left">
-          <p><strong @click="notificheOn()">Attiva</strong> notiche di nuovi messaggi</p>
+          <div class="notifiche">
+            <p class="hide"><span style="color: #FFFFFF; font-size: 35px"><strong>&cross;</strong></span></p>
+            <p class="show" style="display:none"><span style="color: #FFFFFF; font-size: 35px"><strong>&#10004;</strong></span></p>
+          </div>
+          <p class="hide"> <strong @click="notificheOn(); onOff()">Attiva</strong> notiche di nuovi messaggi</p>
+          <p class="show" style="display:none"> <strong @click="notificheOff(); offOn()">Disattiva</strong> notiche di nuovi messaggi</p>
           <div class="test" @click="slideUp()">
             <h3>Tony Stark</h3>
             <p>+39 00009900</p>
@@ -29,17 +34,16 @@
       </div>
       <div class="right">
         <div class="top-right">
-
+          <span @click="back()">&#9776;</span>
         </div>
         <div class="center-right">
           <div class="message-left">
-            <div class="new-message">
-
+            <div class="new-message" style="border-radius: 10px">
             </div>
           </div>
-          <div class="message-right">
-            <div class="risp">
-              <p></p>
+          <div class="message-right" >
+            <div class="risp" >
+              <p style="border-radius: 10px; padding: 10px" ></p>
             </div>
           </div>
         </div>
@@ -126,11 +130,25 @@ export default {
     }
   },
   methods: {
-    // show
+    // Show message
     show() {
       $('.right').css("display", "block");
       $(".left").css("display", "none");
-
+    },
+    // Back list
+    back() {
+      $('.right').css("display", "none");
+      $('.left').css("display", "block");
+    },
+    // Notifiche on
+    onOff() {
+      $('.show').css("display", "block");
+      $(".hide").css("display", "none");
+    },
+    // Notifiche off
+    offOn() {
+      $('.show').css("display", "none");
+      $(".hide").css("display", "block");
     },
     // Slide down
     slideDown() {
@@ -150,7 +168,12 @@ export default {
     },
     // Attivo notifiche
     notificheOn() {
-      return alert('Notiche Attivate');
+      alert('Notiche Attivate');
+      $('.notifiche .hide').css('dispay', 'none');
+    },
+    // Disattivo notifiche
+    notificheOff() {
+      alert('Notiche Disattivate');
     },
     // Stampo i messaggi relativi
     stampMessage() {
@@ -252,6 +275,9 @@ export default {
             justify-content: flex-start;
             padding-left: 10px;
             padding-top:10px;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
         .center-left {
@@ -264,7 +290,11 @@ export default {
           p > strong {
             &:hover {
               cursor: pointer;
+              font-size: 18px;
             }
+          }
+          span {
+            margin-right: 10px;
           }
           .test {
             width: 100%;
@@ -286,6 +316,7 @@ export default {
             border-bottom: 1px solid #ededed;
             &:hover {
               background-color: #ededed;
+              cursor: pointer;
             }
             img {
               height: 70px;
@@ -316,12 +347,19 @@ export default {
         float: right;
         .top-right {
           height: 100px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
           background-color: #ededed;
+          span {
+            font-size: 30px;
+            margin-right: 20px;
+          }
         }
         .center-right {
           height: calc(100% - 200px);
           background-image: url('https://www.itl.cat/pngfile/big/7-74810_iron-ultra-hd-iron-man.jpg');
-          background-position:-250px;
+          background-position:center;
           opacity: 0.5;
           overflow-y: auto;
           background-size: cover;
@@ -358,6 +396,7 @@ export default {
             height: 30px;
             width: 80%;
             border-radius: 5px;
+            padding-left: 10px;
           }
           h1 {
             font-size: 50px;
@@ -365,8 +404,6 @@ export default {
             color: white;
             &:hover {
               cursor: pointer;
-              color: #b3ffb3;
-              transform: scale(1.2);
             }
           }
         }
@@ -379,16 +416,17 @@ export default {
       .container-green {
         height: 100px;
         width: 100vw;
-        background-color: #00e6ac;
+        display: none;
       }
       .container-grey {
         height: calc(100vh - 100px);
         width: 100vw;
         background-color: #e6e6e6;
+        display: none;
       }
       .web-app {
-        height: 90%;
-        width: 85%;
+        height: 100%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -414,7 +452,7 @@ export default {
             }
           }
           .center-left {
-            height: 100px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -424,9 +462,12 @@ export default {
                 cursor: pointer;
               }
             }
+            span {
+              margin-right: 10px;
+            }
           }
           .bottom-left {
-            height: calc(100% - 200px);
+            height: calc(100% - 180px);
             background-color: #FFFFFF;
             overflow-y: auto;
             .contacts {
@@ -468,7 +509,7 @@ export default {
           .center-right {
             height: calc(100% - 200px);
             background-image: url('https://www.itl.cat/pngfile/big/7-74810_iron-ultra-hd-iron-man.jpg');
-            background-position:-250px;
+            background-position:center;
             opacity: 0.5;
             overflow-y: auto;
             background-size: cover;
@@ -507,13 +548,12 @@ export default {
               border-radius: 5px;
             }
             h1 {
-              font-size: 50px;
+              font-size: 40px;
               margin-left: 10px;
               color: white;
+              margin-top: 12px;
               &:hover {
                 cursor: pointer;
-                color: #b3ffb3;
-                transform: scale(1.2);
               }
             }
           }
